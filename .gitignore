@@ -1,0 +1,7 @@
+cp_dir/
+*.o
+tmp_*
+tmp/
+test.c
+init.h
+init.c

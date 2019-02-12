@@ -1,0 +1,6 @@
+const char	*str0 = "";
+const char	*str1 = "Une Table A L'Envert N'Est Pas Une Chaise";
+const char	*str2 = "En Effet";
+TEST(str0)
+TEST(str1)
+TEST(str2)

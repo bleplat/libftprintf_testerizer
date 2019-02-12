@@ -1,0 +1,8 @@
+const char		*str0 = "%%";
+const char		*str1 = "%%%%%%";
+const char		*str2 = "I have some %%";
+const char		*str3 = "5%% of people are not part of the 95%% remaining";
+TEST(str0)
+TEST(str1)
+TEST(str2)
+TEST(str3)

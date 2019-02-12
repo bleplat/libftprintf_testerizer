@@ -1,0 +1,4 @@
+TEST("the char %c", 'C')
+TEST("the char %c", '\x99')
+TEST("%c%c%c%c%c", 'H', 'e', 'l', 'l', 'o')
+TEST(" %c %c %c %c %c", 'H', 'e', 'l', 'l', 'o')

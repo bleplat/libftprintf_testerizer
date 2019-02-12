@@ -1,0 +1,6 @@
+TEST("%d", 42)
+TEST("Im at %d, i like %i", 42, 42)
+TEST("%d is same as %o", 42, 42)
+TEST("%d in hex is %x", 42, 42)
+TEST("%d is same as %o", 42, 42)
+TEST("negative %d unsigned %u", -15, -15)

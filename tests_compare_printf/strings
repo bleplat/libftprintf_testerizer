@@ -1,0 +1,8 @@
+TEST("there is nothing: '%s'", "")
+TEST("%.7s %.5s", "Hello World", "!")
+TEST("there is null: '%s'", (void*)0)
+TEST("Some%-5s", "where")
+TEST("Some%-5s", "things")
+TEST("Some%-5s", "how")
+TEST("what%syou%sfrom%s?", " are ", " expecting ", "this")
+TEST("whoops %s %s %s", "%", "%%", "%d")
