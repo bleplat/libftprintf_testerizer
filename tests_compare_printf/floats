@@ -20,9 +20,16 @@ TEST("the %4.3lf test", -4444.1247)
 TEST("the %4.3lf test", -4444.1247)
 // even printf is glitching on this one
 //TEST("the %1.3lf test", 34354583984528754.8453)
+TEST("the %#Lf test", 44.12L)
 TEST("the %#Lf test", -44.12L)
 TEST("the %#0-4Lf test", -23400.0033L)
 TEST("the %#0-.8Lf test", -23400.0033L)
 TEST("the %#0-9.7Lf test", -23400.0033L)
+TEST("the %#0-4Lf test", 23400.0033L)
+TEST("the %#0-.8Lf test", 23400.0033L)
+TEST("the %#0-9.7Lf test", 23400.0033L)
+TEST("the %.40f test", 4727.1000304)
+TEST("the %.0f test", 4727.1000304)
+TEST("the %.1f test", 2.050012232232)
 
 
