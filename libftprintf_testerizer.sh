@@ -11,12 +11,31 @@
 #                                                                              #
 # **************************************************************************** #
 
-### CONFIG ###
-# Project to copy
-project_dir=../no_try_yet
-# Additional flags (cf -fsanitize=addressi)
-add_flags="-fsanitize=address"
 
+
+################################################################################
+###     CONFIG                                                               ###
+
+# Project to test:
+project_dir=../no_try_yet
+
+# Additional flags (cf "-fsanitize=address")
+add_flags=""
+
+# Toggle the folowing lines to copy your project or to use its directory
+should_copy_project=yes
+
+###     /CONFIG                                                              ###
+################################################################################
+
+
+
+if [ "$shoud_copy_project" == "yes" ]
+then
+  test_dir=$project_dir
+else
+  test_dir=./cp_dir
+fi
 
 ret_printf=""
 rst_printf=""
@@ -31,13 +50,21 @@ col_ok="\e[32m"
 col_ko="\e[31m"
 col_exp="\e[91m"
 
+test_to_run=""
+
 if [ "$1" = "run" ] ; then
 	printf "${col_def}Just running tests\n"
+	test_to_run=$2
 else
-	printf "${col_def}Recopying/Recompiling the project. Use './$0 run' to only re-run the tests\n"
-	rm -rf "./cp_dir"
-	cp -rf $project_dir "./cp_dir"
-	make -C "./cp_dir"
+	test_to_run=$1
+	if [ "$test_dir" = "./cp_dir" ]
+	then
+		printf "${col_def}Recopying/Recompiling the project. Use './$0 run' to only re-run the tests\n"
+		rm -rf "./cp_dir"
+		cp -rf $project_dir "./cp_dir"
+	fi
+	make fclean -C $test_dir
+	make all -C $test_dir
 fi
 
 total_passed=0
@@ -54,7 +81,7 @@ function init_test()
 
 function compile_test()
 {
-	gcc -w ${add_flags} -o runtest.out test.c -L ./cp_dir/ -lftprintf
+	gcc -w $add_flags -o runtest.out test.c -L $test_dir -lftprintf
 }
 
 function single_test()
@@ -88,6 +115,7 @@ function single_test()
 # $1: file to test
 function test_file()
 {
+	echo "file $1"
 	printf "$col_def"
 	printf "RUNNING TESTS FOR $col_nam%s\n" $(echo $1 | sed "s/.*\///g")
 	init_test $1
@@ -97,9 +125,17 @@ function test_file()
 	done <<< "$tests"
 }
 
-for testname in ./tests_compare_printf/*; do
-	test_file $testname
-done
+if [ "$test_to_run" != "" ]; then
+  if [ -e "./tests_compare_printf/$test_to_run" ]; then
+    test_file "./tests_compare_printf/$test_to_run"
+  else
+    echo "NO SUCH TEST!"
+  fi
+else
+  for testname in ./tests_compare_printf/*; do
+    test_file $testname
+  done
+fi
 
 
 printf $col_def
