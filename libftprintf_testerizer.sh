@@ -17,12 +17,15 @@
 ###     CONFIG                                                               ###
 
 # Project to test:
-project_dir=../no_try_yet
+project_dir=../try0
 
 # Additional flags (cf "-fsanitize=address")
 add_flags=""
 
 # Toggle the folowing lines to copy your project or to use its directory
+# /!\ DISABLE THIS AT YOU OWN RISKS, THIS WILL PREVENT FORBIDDEN FUNCTION TESTS
+# FROM RUNNING AND ALSO BREAK OTHER THINGS, USE ONLY IF YOUR PROJECT IS SO
+# BROKEN THAT YOU NEED THIS. IF YOU NEED THIS THEN YOU WILL HAVE 0/100.
 should_copy_project=yes
 
 ###     /CONFIG                                                              ###
@@ -115,7 +118,6 @@ function single_test()
 # $1: file to test
 function test_file()
 {
-	echo "file $1"
 	printf "$col_def"
 	printf "RUNNING TESTS FOR $col_nam%s\n" $(echo $1 | sed "s/.*\///g")
 	init_test $1
@@ -129,7 +131,7 @@ if [ "$test_to_run" != "" ]; then
   if [ -e "./tests_compare_printf/$test_to_run" ]; then
     test_file "./tests_compare_printf/$test_to_run"
   else
-    echo "NO SUCH TEST!"
+    printf "${col_ko}NO SUCH TEST!\x1b[0m\n"
   fi
 else
   for testname in ./tests_compare_printf/*; do
@@ -142,3 +144,6 @@ printf $col_def
 printf "ALL DONE!"
 printf "$col_ok\tPASSED: %s / %s" $total_passed "`expr $total_passed + $total_failed`"
 printf "$col_ko\tFAILED: %s / %s" $total_failed "`expr $total_passed + $total_failed`"
+printf "\n"
+
+sh findforbidden.sh
