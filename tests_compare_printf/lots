@@ -1,0 +1,1 @@
+TEST("%s%5s params %s%s%s%s %o%d%x %c%c %s %d%d%d%d%d%d%4 x", "how", "many", "do ", "you", "handle?", "", 42, 42, 42, '4', '2', "!!!", 1, 1, 1, 1, 1, 1, 42)

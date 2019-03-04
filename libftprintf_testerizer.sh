@@ -17,7 +17,7 @@
 ###     CONFIG                                                               ###
 
 # Project to test:
-project_dir=../try0
+project_dir=~/projects/libft/newlibft
 
 # Additional flags (cf "-fsanitize=address")
 add_flags=""
